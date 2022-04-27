@@ -7,11 +7,16 @@ ruby '3.1.1'
 gem 'bootsnap', '>= 1.4.2', require: false
 gem 'cancancan'
 gem 'devise'
+gem 'image_processing', '>= 1.2'
 gem 'jbuilder', '~> 2.7'
+gem 'net-imap', require: false
+gem 'net-pop', require: false
+gem 'net-smtp', require: false
 gem 'pg', '>= 0.18', '< 2.0'
 gem 'psych', '< 4'
 gem 'puma', '~> 4.1'
 gem 'rails', '~> 6.0.4', '>= 6.0.4.7'
+gem 'rails-erd'
 gem 'sass-rails', '>= 6'
 gem 'turbolinks', '~> 5'
 
@@ -24,7 +29,6 @@ group :development do
   gem 'spring'
   gem 'spring-watcher-listen', '~> 2.0.0'
   gem 'web-console', '>= 3.3.0'
-
 end
 
 group :test do
