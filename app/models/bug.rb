@@ -6,4 +6,6 @@ class Bug < ApplicationRecord
   has_many :users, through: :bugs_users
 
   has_one_attached :screenshot
+
+  validates :screenshot, content_type: ['image/png', 'image/gif']
 end
