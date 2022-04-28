@@ -11,17 +11,32 @@
     </div>
   <% end %>
 
-  <div class="field">
-    <%= form.label :title %>
-    <%= form.text_field :title %>
-  </div>
+<div class="row">
+    <div class="col-lg-4 col-lg-offset-4">
+      <%= form.label :title, class: "form-label" %>
+        <div class="input-group">
+          <%= form.text_field :title, class: "form-control" %>
+        </div>
+    </div>
+</div>
 
-  <div class="field">
-    <%= form.label :description %>
-    <%= form.text_area :description %>
-  </div>
+<div class="row">
+    <div class="col-lg-4 col-lg-offset-4">
+      <%= form.label :description, class: "form-label" %>
+        <div class="input-group">
+          <%= form.text_area :description,  class: "form-control" %>
+        </div>
+    </div>
+</div>
 
-  <div class="actions">
-    <%= form.submit %>
-  </div>
+
+<div class="row">
+    <div class="col-lg-4 col-lg-offset-4">
+        <div class="input-group">
+          <%= form.submit%>
+        </div>
+    </div>
+</div>
+
+
 <% end %>
