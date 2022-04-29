@@ -2,7 +2,7 @@
 
 class ProjectsController < ApplicationController
   # load_and_authorize_resource
-  before_action :set_project, only: %i[show edit update destroy]
+  before_action :set_project, only: %i[show edit update destroy edit2]
 
   # GET /projects or /projects.json
   def index
@@ -22,7 +22,8 @@ class ProjectsController < ApplicationController
   # GET /projects/1/edit
   def edit; end
 
-  # POST /projects or /projects.json
+  def edit2; end
+
   def create
     @project = Project.new(project_params)
     @project.user_ids = current_user.id
@@ -40,7 +41,11 @@ class ProjectsController < ApplicationController
 
   def update
     respond_to do |format|
-      if @project.update(project_params)
+      if params[:project][:user_ids] != current_user.id
+        @project.projects_users.create(user_id: params[:project][:user_ids])
+        format.html { redirect_to project_url(@project), notice: 'Project was successfully updated1.' }
+        format.json { render :show, status: :created, location: @project }
+      elsif @project.update(project_params)
         format.html { redirect_to project_url(@project), notice: 'Project was successfully updated.' }
         format.json { render :show, status: :ok, location: @project }
       else
@@ -65,7 +70,11 @@ class ProjectsController < ApplicationController
     @project = Project.find(params[:id])
   end
 
+  def projectuser_params
+    params.require(:project).permit(:user_ids)
+  end
+
   def project_params
-    params.require(:project).permit(:title, :description)
+    params.require(:project).permit(:title, :description, :user_ids)
   end
 end
