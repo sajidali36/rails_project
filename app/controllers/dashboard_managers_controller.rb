@@ -10,10 +10,6 @@ class DashboardManagersController < ApplicationController
 
   def edit; end
 
-  def new; end
-
-  def create; end
-
   private
 
   def set_project

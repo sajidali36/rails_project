@@ -8,7 +8,7 @@ Rails.application.routes.draw do
   resources :bugs
   resources :projects do
     member do
-      get 'edit2'
+      get 'edit_users_list'
     end
   end
 

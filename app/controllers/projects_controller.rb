@@ -2,7 +2,7 @@
 
 class ProjectsController < ApplicationController
   # load_and_authorize_resource
-  before_action :set_project, only: %i[show edit update destroy edit2]
+  before_action :set_project, only: %i[show edit update destroy edit_users_list]
 
   # GET /projects or /projects.json
   def index
@@ -22,7 +22,7 @@ class ProjectsController < ApplicationController
   # GET /projects/1/edit
   def edit; end
 
-  def edit2; end
+  def edit_users_list; end
 
   def create
     @project = Project.new(project_params)
@@ -70,7 +70,7 @@ class ProjectsController < ApplicationController
     @project = Project.find(params[:id])
   end
 
-  def projectuser_params
+  def project_user_params
     params.require(:project).permit(:user_ids)
   end
 
