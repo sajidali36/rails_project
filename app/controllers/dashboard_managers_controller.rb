@@ -2,11 +2,11 @@
 
 class DashboardManagersController < ApplicationController
   before_action :set_project, only: %i[edit]
-  def index; end
-
-  def show
+  def index
     @projects = Project.all
   end
+
+  def show; end
 
   def edit; end
 
