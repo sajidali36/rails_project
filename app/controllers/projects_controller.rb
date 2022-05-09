@@ -22,7 +22,10 @@ class ProjectsController < ApplicationController
   # GET /projects/1/edit
   def edit; end
 
-  def edit_users_list; end
+  def edit_users_list
+    @all_users = User.where.not(user_type: 0)
+    @project_user = @project.projects_users.build
+  end
 
   def create
     @project = Project.new(project_params)

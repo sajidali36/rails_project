@@ -40,6 +40,17 @@
       </div>
   </div>
 
+  <div class="row">
+      <div class="col-lg-4 col-lg-offset-4">
+          <%= form.fields_for (@project_user) do |u| %>
+          <div class="input-group col-6">
+            <%= u.label "All users" %><br />
+            <%= collection_select(:users, :id, @all_users, :id, :name, {}, {:multiple => true})%>
+          </div>
+          <% end %>
+      </div>
+  </div>
+
 
 
   <div class="row">
