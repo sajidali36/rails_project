@@ -11,7 +11,7 @@
 </p>
 
 <h2>Bugs</h2>
-<% for bug in @project.bugs %>
+<% @project.bugs.each do |bug| %>
     <ul>
       <li><%= bug.title %></li>
       <li><%= bug.description %></li>

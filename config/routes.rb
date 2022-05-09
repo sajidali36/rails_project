@@ -13,7 +13,6 @@ Rails.application.routes.draw do
       get 'edit_users_list'
     end
   end
-  post "projects/:id/bugs/new", to: "bugs#create"
   devise_scope :user do
     authenticated :user do
       root 'projects#index', as: :authenticated_root
