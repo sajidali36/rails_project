@@ -5,13 +5,14 @@ Rails.application.routes.draw do
   resources :dashboard_qas
   resources :dashboard_managers
   devise_for :users
-  resources :bugs
+  resources :projects do
+    resources :bugs
+  end
   resources :projects do
     member do
       get 'edit_users_list'
     end
   end
-
   devise_scope :user do
     authenticated :user do
       root 'projects#index', as: :authenticated_root

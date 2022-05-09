@@ -20,9 +20,9 @@
         <td><%= bug.description %></td>
         <td><%= bug.deadline %></td>
         <td><%= bug.project_id %></td>
-        <td><%= link_to 'Show', bug %></td>
-        <td><%= link_to 'Edit', edit_bug_path(bug) %></td>
-        <td><%= link_to 'Destroy', bug, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <td><%= link_to 'Show Project', project_path(@project) %></td>
+        <td><%= link_to 'Edit Bug', edit_project_bug_path(@project, bug) %></td>
+        <td><%= link_to 'Destroy Bug', project_bug_path(@project, bug), method: :delete, data: { confirm: 'Are you sure?' } %></td>
       </tr>
     <% end %>
   </tbody>
@@ -30,4 +30,5 @@
 
 <br>
 
-<%= link_to 'New Bug', new_bug_path %>
+<%= link_to 'New Bug', new_project_bug_path(@project) %>
+<%= link_to 'Back', dashboard_qas_path %>

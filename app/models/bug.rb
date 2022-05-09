@@ -8,4 +8,5 @@ class Bug < ApplicationRecord
   has_one_attached :screenshot
 
   validates :screenshot, content_type: ['image/png', 'image/gif']
+  validates :title, presence: true, uniqueness: true
 end
