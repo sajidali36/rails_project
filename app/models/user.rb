@@ -6,6 +6,12 @@ class User < ApplicationRecord
 
   has_many :bugs_users
   has_many :bugs, through: :bugs_users
+
+  enum user_type: {
+    manager: 0,
+    developer: 1,
+    qa: 2
+  }
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
   devise :database_authenticatable,
