@@ -12,6 +12,8 @@
     <meta name="msapplication-tap-highlight" content="no">
 <link href="https://demo.dashboardpack.com/architectui-html-free/main.css" rel="stylesheet"></head>
 <body>
- <%= yield %>
+    <% if current_user.developer? %>
+        <%= yield %>
+    <% end %>
 <script type="text/javascript" src="https://demo.dashboardpack.com/architectui-html-free/assets/scripts/main.js"></script></body>
 </html>
