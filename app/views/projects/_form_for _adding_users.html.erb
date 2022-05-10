@@ -32,6 +32,18 @@
   </div>
 
 
+<div class="row">
+    <div class="col-lg-8 col-lg-offset-4">
+        <h4>Added users</h4>
+        <div class="input-group col-12">
+          <% @project.users.each do |user| %>
+            <%= check_box_tag "project[remove_ids][]", user.id  %>
+            <%= user.name %><br>
+          <% end %>
+        </div>
+    </div>
+  </div>
+
   <h2>Users</h2>
     <% @project.users.each do |user| %>
       <ul>
