@@ -6,7 +6,12 @@ Rails.application.routes.draw do
   resources :dashboard_managers
   devise_for :users
   resources :projects do
-    resources :bugs
+    resources :bugs do
+      collection do
+        get 'assign_bugs_to_user'
+        post 'add_bugs_to_user'
+      end
+    end
   end
   resources :projects do
     member do

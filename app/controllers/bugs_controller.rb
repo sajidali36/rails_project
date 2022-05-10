@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 class BugsController < ApplicationController
-  before_action :get_project
+  before_action :fetch_project
   before_action :set_bug, only: %i[show edit update destroy]
 
   # GET /bugs or /bugs.json
@@ -19,6 +19,21 @@ class BugsController < ApplicationController
 
   # GET /bugs/1/edit
   def edit; end
+
+  def assign_bugs_to_user
+    @bugs = @project.bugs
+  end
+
+  def add_bugs_to_user
+    respond_to do |format|
+      params[:user][:bug_ids].each do |id|
+        @user = current_user
+        @user.bugs_users.create(bug_id: id.to_i)
+      end
+      format.html { redirect_to project_bug_path(@project), notice: 'Bug was successfully updated.' }
+      format.json { render :show, status: :ok, location: @bug }
+    end
+  end
 
   # POST /bugs or /bugs.json
   def create
@@ -68,7 +83,7 @@ class BugsController < ApplicationController
     params.require(:bug).permit(:title, :description, :screenshot, :deadline, :project_id)
   end
 
-  def get_project
+  def fetch_project
     @project = Project.find(params[:project_id])
   end
 end

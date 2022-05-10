@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 class ProjectsController < ApplicationController
-  # load_and_authorize_resource
+  load_and_authorize_resource
   before_action :set_project, only: %i[show edit update destroy edit_users_list]
 
   # GET /projects or /projects.json
@@ -22,10 +22,7 @@ class ProjectsController < ApplicationController
   # GET /projects/1/edit
   def edit; end
 
-  def edit_users_list
-    @all_users = User.where.not(user_type: 0)
-    @project_user = @project.projects_users.build
-  end
+  def edit_users_list; end
 
   def create
     @project = Project.new(project_params)
