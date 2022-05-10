@@ -8,12 +8,10 @@ class Ability
     if user.manager?
       can :manage, :all
     elsif user.developer?
-      # can :manage, Project, user_ids: user.id
       can :read, Project
       can %i[read update], Bug
       can :manage, :DashboardDevelopersController
     elsif user.qa?
-      # can :manage, Project, user_ids: user.id
       can :read, Project
       can :manage, Bug
     end
