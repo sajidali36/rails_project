@@ -26,7 +26,6 @@
     <div class="col-lg-8 col-lg-offset-4">
         <h4>all users</h4>
         <div class="input-group col-12">
-        <%# <%= form.select :user_ids, options_for_select(User.where.not(user_type: 0).pluck(:name, :id)), { include_blank: false, include_hidden: false }, { class: 'form-control service-select', multiple: true } %>
           <%= form.select(:user_ids, User.where.not(user_type: 0).collect {|u| [u.name, u.id]}, { include_blank: false, include_hidden: false }, {multiple: true}) %>
         </div>
     </div>

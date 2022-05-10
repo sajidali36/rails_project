@@ -48,7 +48,6 @@ class ProjectsController < ApplicationController
         params[:project][:user_ids].each do |id|
           @project.projects_users.create(user_id: id.to_i)
         end
-        # @project.projects_users.create(user_id: params[:project][:user_ids][0].to_i)
         format.html { redirect_to project_url(@project), notice: 'Project was successfully updated1.' }
         format.json { render :show, status: :created, location: @project }
       elsif @project.update(project_params)
