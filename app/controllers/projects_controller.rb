@@ -42,7 +42,9 @@ class ProjectsController < ApplicationController
   def update
     respond_to do |format|
       if params[:project][:user_ids] != current_user.id
-        @project.projects_users.create(user_id: params[:project][:user_ids])
+        params[:project][:user_ids].each do |id|
+          @project.projects_users.create(user_id: id.to_i)
+        end
         format.html { redirect_to project_url(@project), notice: 'Project was successfully updated1.' }
         format.json { render :show, status: :created, location: @project }
       elsif @project.update(project_params)
@@ -75,6 +77,6 @@ class ProjectsController < ApplicationController
   end
 
   def project_params
-    params.require(:project).permit(:title, :description, :user_ids)
+    params.require(:project).permit(:title, :description, user_ids: [])
   end
 end
