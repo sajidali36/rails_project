@@ -42,9 +42,7 @@ class ProjectsController < ApplicationController
   def update
     respond_to do |format|
       if params[:project][:user_ids] != current_user.id
-        params[:project][:user_ids].each do |id|
-          @project.projects_users.create(user_id: id.to_i)
-        end
+        @project.user_ids = params[:project][:user_ids].map(&:to_i)
         format.html { redirect_to project_url(@project), notice: 'Project was successfully updated1.' }
         format.json { render :show, status: :created, location: @project }
       elsif @project.update(project_params)

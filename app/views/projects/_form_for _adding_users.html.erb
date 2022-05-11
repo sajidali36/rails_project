@@ -26,30 +26,10 @@
     <div class="col-lg-8 col-lg-offset-4">
         <h4>all users</h4>
         <div class="input-group col-12">
-          <%= form.select(:user_ids, User.where.not(user_type: :manager).collect {|u| [u.name, u.id]}, { include_blank: false, include_hidden: false }, {multiple: true}) %>
+          <%= form.select(:user_ids, User.where.not(user_type: :manager).collect {|u| [u.name, u.id]}, { include_blank: false, include_hidden: false }, {multiple: true, id: 'test'}) %>
         </div>
     </div>
   </div>
-
-
-<div class="row">
-    <div class="col-lg-8 col-lg-offset-4">
-        <h4>Added users</h4>
-        <div class="input-group col-12">
-          <% @project.users.each do |user| %>
-            <%= check_box_tag "project[remove_ids][]", user.id  %>
-            <%= user.name %><br>
-          <% end %>
-        </div>
-    </div>
-  </div>
-
-  <h2>Users</h2>
-    <% @project.users.each do |user| %>
-      <ul>
-        <li><%= user.name %></li>
-      </ul>
-    <% end %>
 
 
 
@@ -61,3 +41,10 @@
       </div>
   </div>
 <% end %>
+
+<script>
+$(document).ready(function () {
+  $("#test").CreateMultiCheckBox({ width: '230px',
+             defaultText : 'Select Below', height:'250px' });
+});
+</script>

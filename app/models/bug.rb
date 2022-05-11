@@ -16,7 +16,7 @@ class Bug < ApplicationRecord
   }
 
   enum status_is: {
-    new: 10,
+    New: 10,
     started: 20,
     resolved: 30,
     completed: 40
