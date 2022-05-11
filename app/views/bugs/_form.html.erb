@@ -33,15 +33,15 @@
 
   <div class="field" data-target="type">
      <%= form.label :Type %><br />
-     <%= form.select(:type_of, (Bug.type_ofs.keys).map {|role| [role.titleize,role]}, {}, :id => "mainbox") %>
+     <%= form.select(:type_of, (Bug.type_ofs.keys).map {|role| [role.titleize,role]}, {}, :id => "main_type") %>
    </div>
 
-   <div class="field" data-target="bug" id="forbug" >
+   <div class="field" data-target="bug" id="for_bug" >
      <%= form.label :status %><br />
      <%= form.select(:status_is, (Bug.status_is.keys - ['completed']).map {|role| [role.titleize,role]}) %>
    </div>
 
-   <div class="field" data-target="feature" id="forfeature">
+   <div class="field" data-target="feature" id="for_feature">
      <%= form.label :status %><br />
      <%= form.select(:status_is, (Bug.status_is.keys - ['resolved']).map {|role| [role.titleize,role]}) %>
    </div>
@@ -52,20 +52,20 @@
 <% end %>
 
 <script>
-  var value = document.getElementById("forfeature");
-  value.style.display = 'none';
-  var bug1 = document.getElementById("forbug");
+  var feature_div = document.getElementById("for_feature");
+  feature_div.style.display = 'none';
+  var bug_div = document.getElementById("for_bug");
 
-  document.getElementById("mainbox").addEventListener("change", function(event){
-    var dropdown = document.getElementById("mainbox");
+  document.getElementById("main_type").addEventListener("change", function(event){
+    var dropdown = document.getElementById("main_type");
     var current_value = dropdown.options[dropdown.selectedIndex].value;
     if (current_value == "bug") {
-        bug1.style.display = "block";
-        value.style.display = "none";
+        bug_div.style.display = "block";
+        feature_div.style.display = "none";
     }
     else {
-        value.style.display = "block";
-        bug1.style.display = "none";
+        feature_div.style.display = "block";
+        bug_div.style.display = "none";
       }
       });
 </script>
