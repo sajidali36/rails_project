@@ -26,12 +26,11 @@ class BugsController < ApplicationController
 
   def add_bugs_to_user
     respond_to do |format|
-      params[:user][:bug_ids].each do |id|
+      params[:bug_ids].each do |id|
         @user = current_user
         @user.bugs_users.create(bug_id: id.to_i)
       end
-      format.html { redirect_to project_bug_path(@project), notice: 'Bug was successfully updated.' }
-      format.json { render :show, status: :ok, location: @bug }
+      format.html { redirect_to projects_path, notice: 'Bug was successfully updated.' }
     end
   end
 
