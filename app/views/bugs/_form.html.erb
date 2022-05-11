@@ -31,7 +31,41 @@
     <%= form.date_select :deadline %>
   </div>
 
+  <div class="field" data-target="type">
+     <%= form.label :bug_type %><br />
+     <%= form.select(:bug_type, (Bug.bug_types.keys).map {|role| [role.titleize,role]}, {}, :id => "main_type") %>
+   </div>
+
+   <div class="field" data-target="bug" id="for_bug" >
+     <%= form.label :status %><br />
+     <%= form.select(:status, (Bug.statuses.keys - ['completed']).map {|role| [role.titleize,role]}) %>
+   </div>
+
+   <div class="field" data-target="feature" id="for_feature">
+     <%= form.label :status %><br />
+     <%= form.select(:status, (Bug.statuses.keys - ['resolved']).map {|role| [role.titleize,role]}) %>
+   </div>
+
   <div class="actions">
     <%= form.submit %>
   </div>
 <% end %>
+
+<script>
+  var feature_div = document.getElementById("for_feature");
+  feature_div.style.display = 'none';
+  var bug_div = document.getElementById("for_bug");
+
+  document.getElementById("main_type").addEventListener("change", function(event){
+    var dropdown = document.getElementById("main_type");
+    var current_value = dropdown.options[dropdown.selectedIndex].value;
+    if (current_value == "bug") {
+        bug_div.style.display = "block";
+        feature_div.style.display = "none";
+    }
+    else {
+        feature_div.style.display = "block";
+        bug_div.style.display = "none";
+      }
+      });
+</script>
