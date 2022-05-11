@@ -11,9 +11,12 @@ class Ability
       can :read, Project
       can %i[read update], Bug
       can :manage, :DashboardDevelopersController
+      cannot %i[update destroy], Project
+      cannot %i[create destroy], Bug
     elsif user.qa?
       can :read, Project
-      can :manage, Bug
+      can %i[read create update], Bug
+      cannot %i[create update destroy], Project
     end
   end
 end
