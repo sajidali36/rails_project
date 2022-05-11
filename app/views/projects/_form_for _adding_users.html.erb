@@ -26,7 +26,7 @@
     <div class="col-lg-8 col-lg-offset-4">
         <h4>all users</h4>
         <div class="input-group col-12">
-          <%= form.select(:user_ids, User.where.not(user_type: :manager).collect {|u| [u.name, u.id]}, { include_blank: false, include_hidden: false }, {multiple: true, id: 'test'}) %>
+          <%= form.select(:user_ids, User.where.not(user_type: :manager).collect {|u| [u.name, u.id]}, { include_blank: false, include_hidden: false }, {multiple: true}) %>
         </div>
     </div>
   </div>
@@ -41,10 +41,3 @@
       </div>
   </div>
 <% end %>
-
-<script>
-$(document).ready(function () {
-  $("#test").CreateMultiCheckBox({ width: '230px',
-             defaultText : 'Select Below', height:'250px' });
-});
-</script>

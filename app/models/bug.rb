@@ -10,15 +10,15 @@ class Bug < ApplicationRecord
   validates :screenshot, content_type: ['image/png', 'image/gif']
   validates :title, presence: true, uniqueness: true
 
-  enum type_of: {
+  enum bug_type: {
     bug: 1,
     feature: 2
   }
 
-  enum status_is: {
-    New: 10,
-    started: 20,
-    resolved: 30,
-    completed: 40
+  enum status: {
+    New: 1,
+    started: 2,
+    resolved: 3,
+    completed: 4
   }
 end

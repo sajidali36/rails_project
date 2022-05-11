@@ -32,18 +32,18 @@
   </div>
 
   <div class="field" data-target="type">
-     <%= form.label :Type %><br />
-     <%= form.select(:type_of, (Bug.type_ofs.keys).map {|role| [role.titleize,role]}, {}, :id => "main_type") %>
+     <%= form.label :bug_type %><br />
+     <%= form.select(:bug_type, (Bug.bug_types.keys).map {|role| [role.titleize,role]}, {}, :id => "main_type") %>
    </div>
 
    <div class="field" data-target="bug" id="for_bug" >
      <%= form.label :status %><br />
-     <%= form.select(:status_is, (Bug.status_is.keys - ['completed']).map {|role| [role.titleize,role]}) %>
+     <%= form.select(:status, (Bug.statuses.keys - ['completed']).map {|role| [role.titleize,role]}) %>
    </div>
 
    <div class="field" data-target="feature" id="for_feature">
      <%= form.label :status %><br />
-     <%= form.select(:status_is, (Bug.status_is.keys - ['resolved']).map {|role| [role.titleize,role]}) %>
+     <%= form.select(:status, (Bug.statuses.keys - ['resolved']).map {|role| [role.titleize,role]}) %>
    </div>
 
   <div class="actions">
