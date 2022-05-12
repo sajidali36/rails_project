@@ -11,12 +11,67 @@
 </p>
 
 <h2>Bugs</h2>
-<% @project.bugs.each do |bug| %>
+<table class="table table-striped">
+  <thead>
+    <tr>
+      <th scope="col">Name</th>
+      <th scope="col">Description</th>
+    </tr>
+  </thead>
+  <tbody>
+  <% @project.bugs.each do |bug| %>
+    <tr>
+      <td><%= bug.title %></td>
+      <td><%= bug.description %></td>
+    </tr>
+  <% end %>
+  </tbody>
+</table>
+
+<% if current_user.developer? %>
+<h2>Assigned bugs</h2>
+<table class="table table-striped">
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Description</th>
+      <th>Resolve</th>
+    </tr>
+  </thead>
+  <tbody>
+  <% current_user.bugs.where("project_id = ?", @project.id).each do |bug| %>
+    <tr>
+      <td><%= bug.title %></td>
+      <td><%= bug.description %></td>
+      <td><%= link_to 'resolve', edit_project_bug_path(@project, bug) %></td>
+    </tr>
+  <% end %>
+  </tbody>
+</table>
+<% end %>
+
+
+
+<h2>Assign Users</h2>
+<h3>Assign developers</h3>
+<% @project.users.each do |user| %>
     <ul>
-      <li><%= bug.title %></li>
-      <li><%= bug.description %></li>
+      <% if user.user_type == 'developer' %>
+        <li><%= user.name %></li>
+      <% end %>
   </ul>
 <% end %>
+
+<h3>Assign qas</h3>
+<% @project.users.each do |user| %>
+    <ul>
+      <% if user.user_type == 'qa' %>
+        <li><%= user.name %></li>
+      <% end %>
+  </ul>
+<% end %>
+
+
 
 <% if current_user.qa? %>
   <%= link_to 'Add Bug', project_bugs_path(@project) %> |

@@ -36,14 +36,14 @@
      <%= form.select(:bug_type, (Bug.bug_types.keys).map {|role| [role.titleize,role]}, {}, :id => "main_type") %>
    </div>
 
-   <div class="field" data-target="bug" id="for_bug" >
-     <%= form.label :status %><br />
-     <%= form.select(:status, (Bug.statuses.keys - ['completed']).map {|role| [role.titleize,role]}) %>
-   </div>
-
-   <div class="field" data-target="feature" id="for_feature">
+   <div class="field" id="for_feature">
      <%= form.label :status %><br />
      <%= form.select(:status, (Bug.statuses.keys - ['resolved']).map {|role| [role.titleize,role]}) %>
+   </div>
+
+   <div class="field" id="for_bug">
+     <%= form.label :status %><br />
+     <%= form.select(:status, (Bug.statuses.keys - ['completed']).map {|role| [role.titleize,role]}) %>
    </div>
 
   <div class="actions">
@@ -57,6 +57,7 @@
   var bug_div = document.getElementById("for_bug");
 
   document.getElementById("main_type").addEventListener("change", function(event){
+    debugger
     var dropdown = document.getElementById("main_type");
     var current_value = dropdown.options[dropdown.selectedIndex].value;
     if (current_value == "bug") {

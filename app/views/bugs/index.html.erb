@@ -32,4 +32,10 @@
 <% if current_user.qa? %>
 <%= link_to 'New Bug', new_project_bug_path(@project) %>
 <% end %>
-<%= link_to 'Back', dashboard_qas_path %>
+<% if current_user.manager? %>
+  <%= link_to 'Back', dashboard_managers_path %>
+<% elsif current_user.developer? %>
+  <%= link_to 'Back', dashboard_developers_path %>
+<% elsif current_user.qa? %>
+  <%= link_to 'Back', dashboard_qas_path %>
+<% end %>

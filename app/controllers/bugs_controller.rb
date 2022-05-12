@@ -4,7 +4,6 @@ class BugsController < ApplicationController
   before_action :fetch_project
   before_action :set_bug, only: %i[show edit update destroy]
 
-  # GET /bugs or /bugs.json
   def index
     @bugs = @project.bugs
   end
@@ -23,15 +22,17 @@ class BugsController < ApplicationController
 
   def add_bugs_to_user
     respond_to do |format|
-      params[:bug_ids].each do |id|
+      if params[:bug_ids]
         @user = current_user
-        @user.bugs_users.create(bug_id: id.to_i)
+        @user.bug_ids = params[:bug_ids].map(&:to_i)
+        format.html { redirect_to project_path(@project), notice: 'Bug was successfully updated.' }
+      else
+        format.html { redirect_to dashboard_developers_path, notice: 'Bug was not successfully updated.' }
+        format.json { render json: @bug.errors, status: :unprocessable_entity }
       end
-      format.html { redirect_to projects_path, notice: 'Bug was successfully updated.' }
     end
   end
 
-  # POST /bugs or /bugs.json
   def create
     @bug = @project.bugs.build(bug_params)
 
