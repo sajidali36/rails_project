@@ -9,15 +9,12 @@ class BugsController < ApplicationController
     @bugs = @project.bugs
   end
 
-  # GET /bugs/1 or /bugs/1.json
   def show; end
 
-  # GET /bugs/new
   def new
     @bug = @project.bugs.build
   end
 
-  # GET /bugs/1/edit
   def edit; end
 
   def assign_bugs_to_user

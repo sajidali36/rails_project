@@ -1,14 +1,11 @@
 # frozen_string_literal: true
 
 class DashboardManagersController < ApplicationController
+  authorize_resource class: :DashboardManagersController
   before_action :set_project, only: %i[edit]
   def index
     @projects = Project.all
   end
-
-  def show; end
-
-  def edit; end
 
   private
 

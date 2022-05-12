@@ -5,6 +5,12 @@
 <div class="row">
       <div class="col-lg-4 col-lg-offset-4">
         <%= link_to 'Show', @project %> |
-        <%= link_to 'Back', projects_path %>
+        <% if current_user.manager? %>
+          <%= link_to 'Back', dashboard_managers_path %>
+        <% elsif current_user.developer? %>
+          <%= link_to 'Back', dashboard_developers_path %>
+        <% elsif current_user.qa? %>
+          <%= link_to 'Back', dashboard_qas_path %>
+        <% end %>
       </div>
   </div>
