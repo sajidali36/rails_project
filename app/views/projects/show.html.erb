@@ -28,7 +28,7 @@
   </tbody>
 </table>
 
-<% if current_user.developer? %>
+<% if can? :update, Bug %>
 <h2>Assigned bugs</h2>
 <table class="table table-striped">
   <thead>
@@ -51,7 +51,7 @@
 <% end %>
 
 
-
+<% if can? :manage, Project %>
 <h2>Assign Users</h2>
 <h3>Assign developers</h3>
 <% @project.users.each do |user| %>
@@ -70,20 +70,19 @@
       <% end %>
   </ul>
 <% end %>
+<% end %>
 
 
-
-<% if current_user.qa? %>
+<% if can? :create, Bug %>
   <%= link_to 'Add Bug', project_bugs_path(@project) %> |
 <% end %>
-<% if current_user.developer? %>
+<% if  can? :update, Bug %>
   <%= link_to 'Assign Bugs', assign_bugs_to_user_project_bugs_path(@project) %> |
 <% end %>
-<% if current_user.manager? %>
-  <%= link_to 'Edit', edit_project_path(@project) %> |
+<% if can? :manage, :DashboardManagersController  %>
   <%= link_to 'Back', dashboard_managers_path %>
-<% elsif current_user.developer? %>
+<% elsif can? :manage, :DashboardDevelopersController %>
   <%= link_to 'Back', dashboard_developers_path %>
-<% elsif current_user.qa? %>
+<% elsif can? :manage, :DashboardQasController  %>
   <%= link_to 'Back', dashboard_qas_path %>
 <% end %>

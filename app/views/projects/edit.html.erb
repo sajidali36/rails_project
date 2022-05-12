@@ -5,11 +5,11 @@
 <div class="row">
       <div class="col-lg-4 col-lg-offset-4">
         <%= link_to 'Show', @project %> |
-        <% if current_user.manager? %>
+        <% if can? :manage, :DashboardManagersController  %>
           <%= link_to 'Back', dashboard_managers_path %>
-        <% elsif current_user.developer? %>
+        <% elsif can? :manage, :DashboardDevelopersController %>
           <%= link_to 'Back', dashboard_developers_path %>
-        <% elsif current_user.qa? %>
+        <% elsif can? :manage, :DashboardQasController  %>
           <%= link_to 'Back', dashboard_qas_path %>
         <% end %>
       </div>

@@ -19,7 +19,7 @@
         <td><%= bug.deadline %></td>
         <td><%= link_to 'Show Project', project_path(@project) %></td>
         <%# <td><%= link_to 'Add', project_path(@project) %>
-        <% if current_user.developer? %>
+        <% if can? :update, Bug %>
         <td><%= link_to 'Edit Bug', edit_project_bug_path(@project, bug) %></td>
         <% end %>
         <%# <td><%= link_to 'Destroy Bug', project_bug_path(@project, bug), method: :delete, data: { confirm: 'Are you sure?' } %>
@@ -29,13 +29,13 @@
 </table>
 
 <br>
-<% if current_user.qa? %>
+<% if can? :create, Bug %>
 <%= link_to 'New Bug', new_project_bug_path(@project) %>
 <% end %>
-<% if current_user.manager? %>
+<% if can? :manage, :DashboardManagersController  %>
   <%= link_to 'Back', dashboard_managers_path %>
-<% elsif current_user.developer? %>
+<% elsif can? :manage, :DashboardDevelopersController %>
   <%= link_to 'Back', dashboard_developers_path %>
-<% elsif current_user.qa? %>
+<% elsif can? :manage, :DashboardQasController  %>
   <%= link_to 'Back', dashboard_qas_path %>
 <% end %>

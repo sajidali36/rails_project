@@ -2,6 +2,6 @@
 
 <%= render 'form', project: @project %>
 
-<% if current_user.manager? %>
+<% if can? :manage, :DashboardManagersController %>
   <%= link_to 'Back', dashboard_managers_path %>
 <% end %>

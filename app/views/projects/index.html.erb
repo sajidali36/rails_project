@@ -20,7 +20,7 @@
                         <th>Title</th>
                         <th>Description</th>
                         <th>Show</th>
-                        <% if current_user.manager? %>
+                        <% if can? %i[update destroy], @projects  %>
                         <th>Edit</th>
                         <th>Add users</th>
                         <th>Delete</th>
@@ -33,7 +33,7 @@
                       <td class="w-25 p-3"><%= project.title %></td>
                       <td><%= project.description %></td>
                       <td><%= link_to 'Show', project, class: "show" %></td>
-                      <% if current_user.manager? %>
+                      <% if can? %i[update destroy], project %>
                       <td><%= link_to 'Edit', edit_project_path(project), class: "edit" %></td>
                       <td><%= link_to 'Add users', edit_users_list_project_path(project), class: "edit" %></td>
                       <td><%= link_to 'Destroy', project, method: :delete, data: { confirm: 'Are you sure?' }, class: "delete"  %></td>
