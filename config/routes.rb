@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
 Rails.application.routes.draw do
+  get 'test_background_jobs/index'
   resources :dashboard_developers
   resources :dashboard_qas
   resources :dashboard_managers
