@@ -9,7 +9,7 @@
 					</div>
 					<div class="col-sm-6">
             <% if current_user.manager? %>
-						<a href="projects/new"  class="btn btn-success" data-toggle="modal"><i class="material-icons">&#xE147;</i> <span>Add New Project </span></a>
+						<a href="projects/new"  class="btn btn-success" data-toggle="modal"><span>Add New Project </span></a>
             <% end %>
 					</div>
                 </div>
@@ -20,7 +20,7 @@
                         <th>Title</th>
                         <th>Description</th>
                         <th>Show</th>
-                        <% if can? %i[update destroy], @projects  %>
+                        <% if can? :manage, Project  %>
                         <th>Edit</th>
                         <th>Add users</th>
                         <th>Delete</th>
