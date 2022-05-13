@@ -10,7 +10,9 @@ class ProjectsController < ApplicationController
   end
 
   # GET /projects/1 or /projects/1.json
-  def show; end
+  def show
+    @assigned_users = current_user.bugs.where('project_id = ?', @project.id)
+  end
 
   # GET /projects/new
   def new

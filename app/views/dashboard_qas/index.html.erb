@@ -27,7 +27,7 @@
                     <tr>
                       <td class="w-25 p-3"><%= project.title %></td>
                       <td><%= project.description %></td>
-                      <td><%= link_to 'Show', project, class: "show" %></td>
+                      <td><%= link_to 'Show', project_path(project), class: "show" %></td>
                     </tr>
                   <% end %>
                 </tbody>
@@ -36,6 +36,5 @@
     </div>
    </div>
   </div>
-  <script src="http://maps.google.com/maps/api/js?sensor=true"></script>
  </div>
 </div>

@@ -39,7 +39,7 @@
     </tr>
   </thead>
   <tbody>
-  <% current_user.bugs.where("project_id = ?", @project.id).each do |bug| %>
+  <% @assigned_users.each do |bug| %>
     <tr>
       <td><%= bug.title %></td>
       <td><%= bug.description %></td>
