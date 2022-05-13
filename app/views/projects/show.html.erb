@@ -56,7 +56,7 @@
 <h3>Assign developers</h3>
 <% @project.users.each do |user| %>
     <ul>
-      <% if user.user_type == 'developer' %>
+      <% if user.developer? %>
         <li><%= user.name %></li>
       <% end %>
   </ul>
@@ -65,7 +65,7 @@
 <h3>Assign qas</h3>
 <% @project.users.each do |user| %>
     <ul>
-      <% if user.user_type == 'qa' %>
+      <% if user.qa? %>
         <li><%= user.name %></li>
       <% end %>
   </ul>

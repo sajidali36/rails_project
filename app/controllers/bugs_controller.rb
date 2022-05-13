@@ -21,15 +21,12 @@ class BugsController < ApplicationController
   end
 
   def add_bugs_to_user
-    respond_to do |format|
-      if params[:bug_ids]
-        @user = current_user
-        @user.bug_ids = params[:bug_ids].map(&:to_i)
-        format.html { redirect_to project_path(@project), notice: 'Bug was successfully updated.' }
-      else
-        format.html { redirect_to dashboard_developers_path, notice: 'Bug was not successfully updated.' }
-        format.json { render json: @bug.errors, status: :unprocessable_entity }
-      end
+    if params[:bug_ids]
+      @user = current_user
+      @user.bug_ids = params[:bug_ids].map(&:to_i)
+      redirect_to project_path(@project), notice: 'Bug was successfully updated.'
+    else
+      redirect_to dashboard_developers_path, notice: 'Bug was not successfully updated.'
     end
   end
 

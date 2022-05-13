@@ -18,11 +18,9 @@
         <td><%= bug.description %></td>
         <td><%= bug.deadline %></td>
         <td><%= link_to 'Show Project', project_path(@project) %></td>
-        <%# <td><%= link_to 'Add', project_path(@project) %>
         <% if can? :update, Bug %>
         <td><%= link_to 'Edit Bug', edit_project_bug_path(@project, bug) %></td>
         <% end %>
-        <%# <td><%= link_to 'Destroy Bug', project_bug_path(@project, bug), method: :delete, data: { confirm: 'Are you sure?' } %>
       </tr>
     <% end %>
   </tbody>
