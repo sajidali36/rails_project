@@ -1,7 +1,6 @@
 <p id="notice"><%= notice %></p>
 
 <h1>Bugs</h1>
-
 <table>
   <thead>
     <tr>
@@ -9,7 +8,6 @@
       <th>Description</th>
       <th>Deadline</th>
       <th>Show Project</th>
-      <th>Add</th>
     </tr>
   </thead>
 
@@ -20,15 +18,22 @@
         <td><%= bug.description %></td>
         <td><%= bug.deadline %></td>
         <td><%= link_to 'Show Project', project_path(@project) %></td>
-        <td><%= link_to 'Add', project_path(@project) %></td>
+        <% if can? :update, Bug %>
         <td><%= link_to 'Edit Bug', edit_project_bug_path(@project, bug) %></td>
-        <td><%= link_to 'Destroy Bug', project_bug_path(@project, bug), method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <% end %>
       </tr>
     <% end %>
   </tbody>
 </table>
 
 <br>
-
+<% if can? :create, Bug %>
 <%= link_to 'New Bug', new_project_bug_path(@project) %>
-<%= link_to 'Back', dashboard_qas_path %>
+<% end %>
+<% if can? :manage, :DashboardManagersController  %>
+  <%= link_to 'Back', dashboard_managers_path %>
+<% elsif can? :manage, :DashboardDevelopersController %>
+  <%= link_to 'Back', dashboard_developers_path %>
+<% elsif can? :manage, :DashboardQasController  %>
+  <%= link_to 'Back', dashboard_qas_path %>
+<% end %>

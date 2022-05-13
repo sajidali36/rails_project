@@ -20,5 +20,8 @@
 <% end %>
 <br>
 
-<%= link_to 'New Bug', new_project_bug_path(@project) %>
-<%= link_to 'Back', dashboard_qas_path %>
+<% if can? :manage, :DashboardManagersController  %>
+  <%= link_to 'Back', dashboard_managers_path %>
+<% elsif can? :manage, :DashboardDevelopersController %>
+  <%= link_to 'Back', dashboard_developers_path %>
+<% end %>

@@ -1,6 +1,16 @@
 <h1>Editing Project</h1>
 
-<%= render 'form', project: @project %>
+<%= render 'form', project: @project %><br />
 
-<%= link_to 'Show', @project %> |
-<%= link_to 'Back', projects_path %>
+<div class="row">
+      <div class="col-lg-4 col-lg-offset-4">
+        <%= link_to 'Show', project_path(@project) %> |
+        <% if can? :manage, :DashboardManagersController  %>
+          <%= link_to 'Back', dashboard_managers_path %>
+        <% elsif can? :manage, :DashboardDevelopersController %>
+          <%= link_to 'Back', dashboard_developers_path %>
+        <% elsif can? :manage, :DashboardQasController  %>
+          <%= link_to 'Back', dashboard_qas_path %>
+        <% end %>
+      </div>
+  </div>

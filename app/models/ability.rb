@@ -6,7 +6,9 @@ class Ability
   def initialize(user)
     user ||= User.new # guest user (not logged in)
     if user.manager?
-      can :manage, :all
+      can :manage, :DashboardManagersController
+      can :manage, Project
+      can :read, Bug
     elsif user.developer?
       can :read, Project, projects_users: { user_id: user.id }
       can %i[read update], Bug
@@ -15,7 +17,8 @@ class Ability
       cannot %i[create destroy], Bug
     elsif user.qa?
       can :read, Project
-      can %i[read create update], Bug
+      can %i[read create], Bug
+      can :manage, :DashboardQasController
       cannot %i[create update destroy], Project
     end
   end

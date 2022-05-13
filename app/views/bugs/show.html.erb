@@ -24,6 +24,7 @@
   <strong>Project:</strong>
   <%= @bug.project_id %>
 </p>
-
+<% if can? :update, Bug %>
 <%= link_to 'Edit', edit_project_bug_path(@project, @bug) %> |
+<% end %>
 <%= link_to 'Back', project_bugs_path(@project) %>
