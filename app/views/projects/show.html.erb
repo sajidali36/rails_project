@@ -11,14 +11,78 @@
 </p>
 
 <h2>Bugs</h2>
-<% @project.bugs.each do |bug| %>
+<table class="table table-striped">
+  <thead>
+    <tr>
+      <th scope="col">Name</th>
+      <th scope="col">Description</th>
+    </tr>
+  </thead>
+  <tbody>
+  <% @project.bugs.each do |bug| %>
+    <tr>
+      <td><%= bug.title %></td>
+      <td><%= bug.description %></td>
+    </tr>
+  <% end %>
+  </tbody>
+</table>
+
+<% if can? :update, Bug %>
+<h2>Assigned bugs</h2>
+<table class="table table-striped">
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Description</th>
+      <th>Resolve</th>
+    </tr>
+  </thead>
+  <tbody>
+  <% @assigned_users.each do |bug| %>
+    <tr>
+      <td><%= bug.title %></td>
+      <td><%= bug.description %></td>
+      <td><%= link_to 'resolve', edit_project_bug_path(@project, bug) %></td>
+    </tr>
+  <% end %>
+  </tbody>
+</table>
+<% end %>
+
+
+<% if can? :manage, Project %>
+<h2>Assign Users</h2>
+<h3>Assign developers</h3>
+<% @project.users.each do |user| %>
     <ul>
-      <li><%= bug.title %></li>
-      <li><%= bug.description %></li>
+      <% if user.developer? %>
+        <li><%= user.name %></li>
+      <% end %>
   </ul>
 <% end %>
 
-<%= link_to 'Edit', edit_project_path(@project) %> |
-<%= link_to 'Add Bug', project_bugs_path(@project) %> |
-<%= link_to 'Assign Bugs', assign_bugs_to_user_project_bugs_path(@project) %> |
-<%= link_to 'Back', projects_path %>
+<h3>Assign qas</h3>
+<% @project.users.each do |user| %>
+    <ul>
+      <% if user.qa? %>
+        <li><%= user.name %></li>
+      <% end %>
+  </ul>
+<% end %>
+<% end %>
+
+
+<% if can? :create, Bug %>
+  <%= link_to 'Add Bug', project_bugs_path(@project) %> |
+<% end %>
+<% if  can? :update, Bug %>
+  <%= link_to 'Assign Bugs', assign_bugs_to_user_project_bugs_path(@project) %> |
+<% end %>
+<% if can? :manage, :DashboardManagersController  %>
+  <%= link_to 'Back', dashboard_managers_path %>
+<% elsif can? :manage, :DashboardDevelopersController %>
+  <%= link_to 'Back', dashboard_developers_path %>
+<% elsif can? :manage, :DashboardQasController  %>
+  <%= link_to 'Back', dashboard_qas_path %>
+<% end %>

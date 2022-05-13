@@ -1,5 +1,7 @@
-<h1 style="text-align:center;">New Project</h1>
+<h1>New Project</h1>
 
 <%= render 'form', project: @project %>
 
-<div style="text-align:center;" ><%= link_to 'Back', projects_path %></div>
+<% if can? :manage, :DashboardManagersController %>
+  <%= link_to 'Back', dashboard_managers_path %>
+<% end %>
