@@ -26,40 +26,27 @@ class ProjectsController < ApplicationController
     @project = Project.new(project_params)
     @project.user_ids = current_user.id
 
-    respond_to do |format|
-      if @project.save
-        format.html { redirect_to project_url(@project), notice: 'Project was successfully created.' }
-        format.json { render :show, status: :created, location: @project }
-      else
-        format.html { render :new, status: :unprocessable_entity }
-        format.json { render json: @project.errors, status: :unprocessable_entity }
-      end
+    if @project.save
+      redirect_to project_url(@project), notice: 'Project was successfully created.'
+    else
+      render :new, status: :unprocessable_entity
     end
   end
 
   def update
-    respond_to do |format|
-      if params[:project][:user_ids] && params[:project][:user_ids] != current_user.id
-        @project.user_ids = params[:project][:user_ids].map(&:to_i)
-        format.html { redirect_to project_url(@project), notice: 'Project was successfully updated1.' }
-        format.json { render :show, status: :created, location: @project }
-      elsif @project.update(project_params)
-        format.html { redirect_to project_url(@project), notice: 'Project was successfully updated.' }
-        format.json { render :show, status: :ok, location: @project }
-      else
-        format.html { render :edit, status: :unprocessable_entity }
-        format.json { render json: @project.errors, status: :unprocessable_entity }
-      end
+    if params[:project][:user_ids] && params[:project][:user_ids] != current_user.id
+      @project.user_ids = params[:project][:user_ids].map(&:to_i)
+      redirect_to project_url(@project), notice: 'Project was successfully updated1.'
+    elsif @project.update(project_params)
+      redirect_to project_url(@project), notice: 'Project was successfully updated.'
+    else
+      render :edit, status: :unprocessable_entity
     end
   end
 
   def destroy
     @project.destroy
-
-    respond_to do |format|
-      format.html { redirect_to dashboard_managers_url, notice: 'Project was successfully destroyed.' }
-      format.json { head :no_content }
-    end
+    redirect_to dashboard_managers_url, notice: 'Project was successfully destroyed.'
   end
 
   private
