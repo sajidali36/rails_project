@@ -34,6 +34,9 @@ class BugsController < ApplicationController
     @bug = @project.bugs.build(bug_params)
 
     if @bug.save
+      project = Project.find(@bug.project_id)
+      users = project.users.where(user_type: 'developer')
+      users.each { |user| UserMailer.bug_created(user).deliver_later }
       redirect_to project_bugs_path(@project), notice: 'Bug was successfully created.'
     else
       render :new, status: :unprocessable_entity
