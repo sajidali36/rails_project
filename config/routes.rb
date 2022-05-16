@@ -2,9 +2,7 @@
 
 Rails.application.routes.draw do
   get 'test_background_jobs/index'
-  resources :dashboard_developers
-  resources :dashboard_qas
-  resources :dashboard_managers
+  resources :dashboard_developers, :dashboard_qas, :dashboard_managers
   devise_for :users
   resources :projects do
     resources :bugs do
