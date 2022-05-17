@@ -29,7 +29,7 @@ class ProjectsController < ApplicationController
     @project.user_ids = current_user.id
 
     if @project.save
-      redirect_to project_url(@project), notice: 'Project was successfully created.'
+      redirect_to project_path(@project), notice: 'Project was successfully created.'
     else
       render :new, status: :unprocessable_entity
     end
@@ -38,9 +38,9 @@ class ProjectsController < ApplicationController
   def update
     if params[:project][:user_ids] && params[:project][:user_ids] != current_user.id
       @project.user_ids = params[:project][:user_ids].map(&:to_i)
-      redirect_to project_url(@project), notice: 'Project was successfully updated1.'
+      redirect_to project_path(@project), notice: 'Project was successfully updated1.'
     elsif @project.update(project_params)
-      redirect_to project_url(@project), notice: 'Project was successfully updated.'
+      redirect_to project_path(@project), notice: 'Project was successfully updated.'
     else
       render :edit, status: :unprocessable_entity
     end
@@ -48,7 +48,7 @@ class ProjectsController < ApplicationController
 
   def destroy
     @project.destroy
-    redirect_to dashboard_managers_url, notice: 'Project was successfully destroyed.'
+    redirect_to dashboard_managers_path, notice: 'Project was successfully destroyed.'
   end
 
   private
