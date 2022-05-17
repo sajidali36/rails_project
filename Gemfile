@@ -4,10 +4,12 @@ source 'https://rubygems.org'
 git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 
 ruby '3.1.1'
+gem 'rails', '~> 6.0.4', '>= 6.0.4.7'
+
 gem 'active_storage_validations'
 gem 'bootsnap', '>= 1.4.2', require: false
-gem 'cancancan'
-gem 'devise'
+gem 'cancancan', '>= 3.3.0'
+gem 'devise', '~> 4.8', '>= 4.8.1'
 gem 'image_processing', '>= 1.2'
 gem 'jbuilder', '~> 2.7'
 gem 'net-imap', require: false
@@ -16,8 +18,6 @@ gem 'net-smtp', require: false
 gem 'pg', '>= 0.18', '< 2.0'
 gem 'psych', '< 4'
 gem 'puma', '~> 4.1'
-gem 'rails', '~> 6.0.4', '>= 6.0.4.7'
-gem 'rails-erd'
 gem 'sass-rails', '>= 6'
 gem 'turbolinks', '~> 5'
 gem 'webpacker', '~> 5.0'
@@ -28,6 +28,7 @@ end
 
 group :development do
   gem 'listen', '~> 3.2'
+  gem 'rails-erd'
   gem 'spring'
   gem 'spring-watcher-listen', '~> 2.0.0'
   gem 'web-console', '>= 3.3.0'
